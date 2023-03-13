@@ -1,3 +1,22 @@
+import { Point as RoughPoint } from "roughjs/bin/geometry";
+
+import { Spreadsheet } from "./charts";
+import { ClipboardData } from "./clipboard";
+import type { ALLOWED_IMAGE_MIME_TYPES, MIME_TYPES } from "./constants";
+import { Language } from "./i18n";
+import { isOverScrollBars } from "./scene";
+import { SHAPES } from "./shapes";
+import { Merge, ForwardRef } from "./utility-types";
+import type { ResolvablePromise, throttleRAF } from "./utils";
+
+import type App from "./components/App";
+import { ContextMenuItems } from "./components/ContextMenu";
+import type { FileSystemHandle } from "./data/filesystem";
+import Library from "./data/library";
+import { ImportedDataState } from "./data/types";
+import { SuggestedBinding } from "./element/binding";
+import { LinearElementEditor } from "./element/linearElementEditor";
+import { MaybeTransformHandleType } from "./element/transformHandles";
 import {
   PointerType,
   ExcalidrawLinearElement,
@@ -15,23 +34,6 @@ import {
   Theme,
   StrokeRoundness,
 } from "./element/types";
-import { SHAPES } from "./shapes";
-import { Point as RoughPoint } from "roughjs/bin/geometry";
-import { LinearElementEditor } from "./element/linearElementEditor";
-import { SuggestedBinding } from "./element/binding";
-import { ImportedDataState } from "./data/types";
-import type App from "./components/App";
-import type { ResolvablePromise, throttleRAF } from "./utils";
-import { Spreadsheet } from "./charts";
-import { Language } from "./i18n";
-import { ClipboardData } from "./clipboard";
-import { isOverScrollBars } from "./scene";
-import { MaybeTransformHandleType } from "./element/transformHandles";
-import Library from "./data/library";
-import type { FileSystemHandle } from "./data/filesystem";
-import type { ALLOWED_IMAGE_MIME_TYPES, MIME_TYPES } from "./constants";
-import { ContextMenuItems } from "./components/ContextMenu";
-import { Merge, ForwardRef } from "./utility-types";
 
 export type Point = Readonly<RoughPoint>;
 
@@ -166,7 +168,7 @@ export type AppState = {
     | "strokeColorPicker"
     | null;
   openSidebar: "library" | "customSidebar" | null;
-  openDialog: "imageExport" | "help" | "jsonExport" | null;
+  openDialog: "imageExport" | "help" | "jsonExport" | "dashBoard" | null;
   isSidebarDocked: boolean;
 
   lastPointerDownWith: PointerType;

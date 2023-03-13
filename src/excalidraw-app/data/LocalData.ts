@@ -11,12 +11,14 @@
  */
 
 import { createStore, entries, del, getMany, set, setMany } from "idb-keyval";
+
+import { SAVE_TO_LOCAL_STORAGE_TIMEOUT, STORAGE_KEYS } from "../app_constants";
 import { clearAppStateForLocalStorage } from "../../appState";
 import { clearElementsForLocalStorage } from "../../element";
-import { ExcalidrawElement, FileId } from "../../element/types";
 import { AppState, BinaryFileData, BinaryFiles } from "../../types";
 import { debounce } from "../../utils";
-import { SAVE_TO_LOCAL_STORAGE_TIMEOUT, STORAGE_KEYS } from "../app_constants";
+import { ExcalidrawElement, FileId } from "../../element/types";
+
 import { FileManager } from "./FileManager";
 import { Locker } from "./Locker";
 import { updateBrowserStateVersion } from "./tabSync";
@@ -47,6 +49,10 @@ const saveDataStateToLocalStorage = (
   elements: readonly ExcalidrawElement[],
   appState: AppState,
 ) => {
+  console.log(elements);
+  let size = new TextEncoder().encode(JSON.stringify(elements)).length;
+  console.log(size / 1024);
+
   try {
     localStorage.setItem(
       STORAGE_KEYS.LOCAL_STORAGE_ELEMENTS,

@@ -15,6 +15,7 @@ import { ErrorDialog } from "./ErrorDialog";
 import { ExportCB, ImageExportDialog } from "./ImageExportDialog";
 import { FixedSideContainer } from "./FixedSideContainer";
 import { HintViewer } from "./HintViewer";
+import { DashboardDialog } from "./Dashboard";
 import { Island } from "./Island";
 import { LoadingMessage } from "./LoadingMessage";
 import { LockButton } from "./LockButton";
@@ -133,6 +134,20 @@ const LayerUI = ({
 
     return (
       <JSONExportDialog
+        elements={elements}
+        appState={appState}
+        files={files}
+        actionManager={actionManager}
+        exportOpts={UIOptions.canvasActions.export}
+        canvas={canvas}
+        setAppState={setAppState}
+      />
+    );
+  };
+
+  const renderDashboardDialog = () => {
+    return (
+      <DashboardDialog
         elements={elements}
         appState={appState}
         files={files}
@@ -379,6 +394,7 @@ const LayerUI = ({
       <ActiveConfirmDialog />
       {renderImageExportDialog()}
       {renderJSONExportDialog()}
+      {renderDashboardDialog()}
       {appState.pasteDialog.shown && (
         <PasteChartDialog
           setAppState={setAppState}

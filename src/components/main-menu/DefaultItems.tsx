@@ -10,6 +10,7 @@ import {
   ExportImageIcon,
   HelpIcon,
   LoadIcon,
+  LibraryIcon,
   MoonIcon,
   save,
   SunIcon,
@@ -54,6 +55,26 @@ export const LoadScene = () => {
   );
 };
 LoadScene.displayName = "LoadScene";
+
+export const Dashboard = () => {
+  const { t } = useI18n();
+  const setAppState = useExcalidrawSetAppState();
+
+  return (
+    <DropdownMenuItem
+      icon={LibraryIcon}
+      onSelect={() => {
+        setAppState({ openDialog: "dashBoard" });
+      }}
+      data-testid="json-export-button"
+      aria-label={"Dashboard"}
+    >
+      {"Dashboard"}
+    </DropdownMenuItem>
+  );
+};
+
+Dashboard.displayName = "Dashboard";
 
 export const SaveToActiveFile = () => {
   const { t } = useI18n();
